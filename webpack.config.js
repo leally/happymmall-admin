@@ -2,7 +2,7 @@
  * @Author: leally Xie 
  * @Date: 2019-11-25 23:33:02 
  * @Last Modified by: leally Xie
- * @Last Modified time: 2019-11-26 23:58:52
+ * @Last Modified time: 2019-12-01 23:44:48
  */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -16,8 +16,17 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'js/app.js'
   },
+  resolve: {
+    alias: {
+      page: path.resolve(__dirname, 'src/page'),
+      component: path.resolve(__dirname, 'src/component')
+    }
+  },
   devServer: {
-    port: 8086
+    port: 8086,
+    historyApiFallback: {
+      index: '/dist/index.html'
+    }
   },
   module: {
     rules: [
@@ -83,7 +92,8 @@ module.exports = {
   plugins: [
     // 处理HTML文件
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      favicon: './static/favicon.ico'
     }),
     // 处理css文件
     new ExtractTextPlugin("css/[name].css"),
