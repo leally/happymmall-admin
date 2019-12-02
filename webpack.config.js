@@ -2,7 +2,7 @@
  * @Author: leally Xie 
  * @Date: 2019-11-25 23:33:02 
  * @Last Modified by: leally Xie
- * @Last Modified time: 2019-12-01 23:44:48
+ * @Last Modified time: 2019-12-02 16:10:38
  */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,13 +19,25 @@ module.exports = {
   resolve: {
     alias: {
       page: path.resolve(__dirname, 'src/page'),
-      component: path.resolve(__dirname, 'src/component')
+      component: path.resolve(__dirname, 'src/component'),
+      util: path.resolve(__dirname, 'src/util'),
+      service: path.resolve(__dirname, 'src/service')
     }
   },
   devServer: {
     port: 8086,
     historyApiFallback: {
       index: '/dist/index.html'
+    },
+    proxy: {
+      '/manage': {
+        target: 'http://admintest.happymmall.com',
+        changeOrigin: true
+      },
+      '/user': {
+        target: 'http://admintest.happymmall.com',
+        changeOrigin: true
+      }
     }
   },
   module: {
