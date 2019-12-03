@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route, Redirect, Link, Switch } from 'react-ro
 import Layout from 'component/layout/index.jsx';
 
 import Home from 'page/home/index.jsx';
+import ProductRouter from 'page/product/router.jsx';
 import Login from 'page/login/index.jsx';
 import ErrorPage from 'page/error/index.jsx';
 import UserList from 'page/user/index.jsx';
@@ -25,39 +26,13 @@ class App extends React.Component {
     return (
       <Layout>
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={Home}
-          />
-          <Route
-            exact
-            path="/prodcut"
-            component={Home}
-          />
-          <Route
-            exact
-            path="/prodcut.category"
-            component={Home}
-          />
-          <Route
-            exact
-            path="/user/index"
-            component={UserList}
-          />
-          <Redirect
-            exact
-            from="/user"
-            to="/user/index"
-          />
-          <Route
-            exact
-            path="/order"
-            component={Home}
-          />
-          <Route
-            component={ErrorPage}
-          />
+          <Route exact path="/" component={Home} />
+          <Route path="/product" component={ProductRouter} />
+          <Route exact path="/product-category" component={Home} />
+          <Route path="/user/index" component={UserList} />
+          <Redirect exact from="/user" to="/user/index" />        
+          <Route exact path="/order" component={Home} />
+          <Route component={ErrorPage} />
         </Switch>
       </Layout>
     )
